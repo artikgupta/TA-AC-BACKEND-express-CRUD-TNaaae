@@ -3,7 +3,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var path = require('path');
 
-var studentRoutes = require('./routes/student');
+var studentRoutes = require('./routes/students');
 
 mongoose.connect(
   'mongodb://localhost/sample',
@@ -20,9 +20,13 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: false }));
+
 app.use(logger('dev'));
+
 app.use('/', require('./routes/index'));
+
 app.use('/students', studentRoutes);
 
 app.use((req, res, next) => {
